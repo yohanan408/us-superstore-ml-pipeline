@@ -13,6 +13,8 @@ def _build_logger(name: str = "pipeline") -> logging.Logger:
     logger.propagate = False
 
     if not logger.handlers:
+        LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+
         formatter = logging.Formatter(LOG_FORMAT, datefmt=DATE_FORMAT)
 
         console_handler = logging.StreamHandler(sys.stdout)
