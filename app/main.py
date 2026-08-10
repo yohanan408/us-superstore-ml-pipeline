@@ -53,12 +53,14 @@ def predict_risk_intercept(payload: CheckoutCartRequest):
             )
             return {
                 "action_directive": "INTERCEPT_BLOCK_TRANSACTION",
+                "prediction_class": prediction,
                 "risk_percentage": risk_percentage,
             }
 
         logger.info("Safe profit transaction passed: prediction=%d risk=%.2f%%", prediction, risk_percentage)
         return {
             "action_directive": "ALLOW_CHECKOUT_FULFILLMENT",
+            "prediction_class": prediction,
             "risk_percentage": risk_percentage,
         }
 

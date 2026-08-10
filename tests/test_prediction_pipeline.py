@@ -70,3 +70,18 @@ def test_api_high_risk_checkout_interception(client):
     response = client.post("/predict/risk-intercept", json=high_risk_cart)
     assert response.status_code == 200
     assert response.json()["action_directive"] == "INTERCEPT_BLOCK_TRANSACTION"
+
+
+def test_api_mid_cliff_interception(client):
+    mid_cliff_cart = {
+        "Sales": 1250.0,
+        "Quantity": 5.0,
+        "Discount": 0.50,
+        "Processing_Time_Days": 4.0,
+        "Category_Furniture": 0,
+        "Category_Office_Supplies": 1,
+    }
+    response = client.post("/predict/risk-intercept", json=mid_cliff_cart)
+    assert response.status_code == 200
+    assert response.json()["prediction_class"] == 1
+    assert response.json()["action_directive"] == "INTERCEPT_BLOCK_TRANSACTION"
