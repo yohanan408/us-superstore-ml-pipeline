@@ -47,13 +47,30 @@ pytest tests/ -v
 
 ```
 us-superstore-ml-pipeline/
-├── app/                  # FastAPI application layer
-├── src/                  # Ingestion, logging, preprocessing modules
-├── data/                 # Raw US Superstore dataset
-├── notebooks/            # EDA / platform analysis notebook
-├── production_models/    # Serialized model, scaler, feature columns
-├── logs/                 # Runtime log output
-├── tests/                # pytest CI suite
+├── app/
+│   └── main.py
+├── data/
+│   └── US Superstore data.xls
+├── logs/
+│   └── pipeline_runtime.log
+├── notebooks/
+│   └── E-Commerce Platform Analysis.ipynb
+├── production_models/
+│   ├── random_forest_risk_classifier.joblib
+│   ├── robust_scaler_pipeline.joblib
+│   └── training_feature_columns.joblib
+├── src/
+│   ├── __init__.py
+│   ├── data_ingestion.py
+│   ├── feature_preprocessor.py
+│   └── logger_config.py
+├── tests/
+│   └── test_prediction_pipeline.py
+├── .gitignore
+├── Dockerfile
+├── docker-compose.yml
+├── LICENSE
+├── README.md
 └── requirements.txt
 ```
 
