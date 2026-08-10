@@ -1,0 +1,54 @@
+[2026-08-10 19:40:47] [INFO] [feature_preprocessor.py:20] ──▸ Transforming incoming checkout payload
+[2026-08-10 19:40:47] [INFO] [feature_preprocessor.py:25] ──▸ Renamed incoming keys to match training columns
+[2026-08-10 19:40:47] [INFO] [feature_preprocessor.py:39] ──▸ Scaled continuous fields via fitted RobustScaler
+[2026-08-10 19:40:48] [INFO] [feature_preprocessor.py:42] ──▸ Payload matrix aligned to model column sequence
+[2026-08-10 20:09:32] [INFO] [main.py:20] ──▸ ML assets loaded successfully
+[2026-08-10 20:09:32] [INFO] [main.py:37] ──▸ Incoming transaction received: {'Discount': 0.2, 'Sales': 1250.0, 'Quantity': 5.0, 'Processing_Time_Days': 4.0, 'Category_Furniture': 0, 'Category_Office_Supplies': 1}
+[2026-08-10 20:09:32] [INFO] [feature_preprocessor.py:20] ──▸ Transforming incoming checkout payload
+[2026-08-10 20:09:32] [INFO] [feature_preprocessor.py:25] ──▸ Renamed incoming keys to match training columns
+[2026-08-10 20:09:32] [INFO] [feature_preprocessor.py:39] ──▸ Scaled continuous fields via fitted RobustScaler
+[2026-08-10 20:09:32] [INFO] [feature_preprocessor.py:42] ──▸ Payload matrix aligned to model column sequence
+[2026-08-10 20:09:32] [INFO] [main.py:59] ──▸ Safe profit transaction passed: prediction=0 risk=43.14%
+[2026-08-10 20:09:32] [INFO] [main.py:37] ──▸ Incoming transaction received: {'Discount': 0.75, 'Sales': 1250.0, 'Quantity': 5.0, 'Processing_Time_Days': 4.0, 'Category_Furniture': 0, 'Category_Office_Supplies': 1}
+[2026-08-10 20:09:32] [WARNING] [main.py:40] ──▸ Extreme markdown detected: Discount=0.75
+[2026-08-10 20:09:32] [INFO] [feature_preprocessor.py:20] ──▸ Transforming incoming checkout payload
+[2026-08-10 20:09:32] [INFO] [feature_preprocessor.py:25] ──▸ Renamed incoming keys to match training columns
+[2026-08-10 20:09:32] [INFO] [feature_preprocessor.py:39] ──▸ Scaled continuous fields via fitted RobustScaler
+[2026-08-10 20:09:32] [INFO] [feature_preprocessor.py:42] ──▸ Payload matrix aligned to model column sequence
+[2026-08-10 20:09:32] [ERROR] [main.py:49] ──▸ Financial Loss Anomaly intercepted: prediction=1 risk=93.56%
+[2026-08-10 20:10:23] [INFO] [main.py:20] ──▸ ML assets loaded successfully
+[2026-08-10 20:10:24] [INFO] [main.py:37] ──▸ Incoming transaction received: {'Discount': 0.2, 'Sales': 1250.0, 'Quantity': 5.0, 'Processing_Time_Days': 4.0, 'Category_Furniture': 0, 'Category_Office_Supplies': 1}
+[2026-08-10 20:10:24] [INFO] [feature_preprocessor.py:20] ──▸ Transforming incoming checkout payload
+[2026-08-10 20:10:24] [INFO] [feature_preprocessor.py:25] ──▸ Renamed incoming keys to match training columns
+[2026-08-10 20:10:24] [INFO] [feature_preprocessor.py:39] ──▸ Scaled continuous fields via fitted RobustScaler
+[2026-08-10 20:10:24] [INFO] [feature_preprocessor.py:42] ──▸ Payload matrix aligned to model column sequence
+[2026-08-10 20:10:24] [INFO] [main.py:59] ──▸ Safe profit transaction passed: prediction=0 risk=43.14%
+[2026-08-10 20:11:29] [INFO] [main.py:20] ──▸ ML assets loaded successfully
+[2026-08-10 20:11:29] [INFO] [main.py:37] ──▸ Incoming transaction received: {'Discount': 0.2, 'Sales': 1250.0, 'Quantity': 5.0, 'Processing_Time_Days': 4.0, 'Category_Furniture': 0, 'Category_Office_Supplies': 1}
+[2026-08-10 20:11:29] [INFO] [feature_preprocessor.py:20] ──▸ Transforming incoming checkout payload
+[2026-08-10 20:11:29] [INFO] [feature_preprocessor.py:25] ──▸ Renamed incoming keys to match training columns
+[2026-08-10 20:11:29] [INFO] [feature_preprocessor.py:39] ──▸ Scaled continuous fields via fitted RobustScaler
+[2026-08-10 20:11:29] [INFO] [feature_preprocessor.py:42] ──▸ Payload matrix aligned to model column sequence
+[2026-08-10 20:11:29] [INFO] [main.py:59] ──▸ Safe profit transaction passed: prediction=0 risk=43.14%
+[2026-08-10 20:22:08] [INFO] [feature_preprocessor.py:20] ──▸ Transforming incoming checkout payload
+[2026-08-10 20:22:08] [INFO] [feature_preprocessor.py:25] ──▸ Renamed incoming keys to match training columns
+[2026-08-10 20:22:08] [INFO] [feature_preprocessor.py:39] ──▸ Scaled continuous fields via fitted RobustScaler
+[2026-08-10 20:22:08] [INFO] [feature_preprocessor.py:42] ──▸ Payload matrix aligned to model column sequence
+[2026-08-10 20:22:08] [INFO] [feature_preprocessor.py:20] ──▸ Transforming incoming checkout payload
+[2026-08-10 20:22:08] [INFO] [feature_preprocessor.py:25] ──▸ Renamed incoming keys to match training columns
+[2026-08-10 20:22:08] [INFO] [feature_preprocessor.py:39] ──▸ Scaled continuous fields via fitted RobustScaler
+[2026-08-10 20:22:08] [INFO] [feature_preprocessor.py:42] ──▸ Payload matrix aligned to model column sequence
+[2026-08-10 20:23:13] [INFO] [main.py:20] ──▸ ML assets loaded successfully
+[2026-08-10 20:23:13] [INFO] [main.py:37] ──▸ Incoming transaction received: {'Discount': 0.0, 'Sales': 1250.0, 'Quantity': 5.0, 'Processing_Time_Days': 4.0, 'Category_Furniture': 0, 'Category_Office_Supplies': 1}
+[2026-08-10 20:23:13] [INFO] [feature_preprocessor.py:20] ──▸ Transforming incoming checkout payload
+[2026-08-10 20:23:13] [INFO] [feature_preprocessor.py:25] ──▸ Renamed incoming keys to match training columns
+[2026-08-10 20:23:13] [INFO] [feature_preprocessor.py:39] ──▸ Scaled continuous fields via fitted RobustScaler
+[2026-08-10 20:23:13] [INFO] [feature_preprocessor.py:42] ──▸ Payload matrix aligned to model column sequence
+[2026-08-10 20:23:13] [INFO] [main.py:59] ──▸ Safe profit transaction passed: prediction=0 risk=2.64%
+[2026-08-10 20:23:13] [INFO] [main.py:37] ──▸ Incoming transaction received: {'Discount': 0.7, 'Sales': 1250.0, 'Quantity': 5.0, 'Processing_Time_Days': 4.0, 'Category_Furniture': 0, 'Category_Office_Supplies': 1}
+[2026-08-10 20:23:13] [WARNING] [main.py:40] ──▸ Extreme markdown detected: Discount=0.70
+[2026-08-10 20:23:13] [INFO] [feature_preprocessor.py:20] ──▸ Transforming incoming checkout payload
+[2026-08-10 20:23:13] [INFO] [feature_preprocessor.py:25] ──▸ Renamed incoming keys to match training columns
+[2026-08-10 20:23:13] [INFO] [feature_preprocessor.py:39] ──▸ Scaled continuous fields via fitted RobustScaler
+[2026-08-10 20:23:13] [INFO] [feature_preprocessor.py:42] ──▸ Payload matrix aligned to model column sequence
+[2026-08-10 20:23:13] [ERROR] [main.py:49] ──▸ Financial Loss Anomaly intercepted: prediction=1 risk=93.56%
