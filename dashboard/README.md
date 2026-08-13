@@ -13,7 +13,9 @@ While our backend Python pipeline flags toxic checkout flows, this dashboard pro
 
 ###  Dashboard Preview
 *(Replace the link below with a direct screenshot or GIF of your final localized Power BI canvas)*
-dashboard/Dashboard_Image.png
+<img width="763" height="431" alt="image" src="https://github.com/user-attachments/assets/19b345af-2ef4-4902-866c-d0feabf7ea87" />
+
+
 ###  Analytical Core & Visual Story
 1. **Category Volume Distribution:** Visualizes processing weights (Office Supplies commanding 60.3% of transaction volume, balanced by Technology and Furniture).
 2. **Chronological Seasonality Analysis:** Mapped custom date/month dimensions (sorted via numerical index) to expose sharp non-linear profit margin cliffs during peak volume discount campaigns.
