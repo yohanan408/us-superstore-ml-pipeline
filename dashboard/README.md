@@ -12,7 +12,6 @@ While our backend Python pipeline flags toxic checkout flows, this dashboard pro
 * **Net Profit Margin:** **12.47%** overall yield, visualized against a **15.00%** strategic corporate target via a dynamic conditional-formatting gauge.
 
 ###  Dashboard Preview
-*(Replace the link below with a direct screenshot or GIF of your final localized Power BI canvas)*
 <img width="763" height="431" alt="image" src="https://github.com/user-attachments/assets/19b345af-2ef4-4902-866c-d0feabf7ea87" />
 
 
