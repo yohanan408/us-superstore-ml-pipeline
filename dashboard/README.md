@@ -13,10 +13,6 @@ While our backend Python pipeline flags toxic checkout flows, this dashboard pro
 
 ###  Dashboard Preview
 <img width="763" height="431" alt="image" src="https://github.com/user-attachments/assets/19b345af-2ef4-4902-866c-d0feabf7ea87" />
-
-
-
-
 <img width="761" height="430" alt="Screenshot 2026-08-13 175913" src="https://github.com/user-attachments/assets/b353f3ed-0fdf-472b-b8c5-52fe74eb22d8" />
 
 
