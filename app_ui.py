@@ -9,7 +9,6 @@ Run:
 """
 
 import datetime as dt
-import os
 from pathlib import Path
 
 import numpy as np
@@ -24,7 +23,6 @@ import streamlit as st
 LOCAL_API_BASE = "http://localhost:8000"
 CLOUD_API_BASE = "https://us-superstore-ml-pipeline.onrender.com"
 API_ENDPOINT_PATH = "/predict/risk-intercept"
-DEFAULT_ENV = "Cloud (Render)" if os.getenv("RENDER") else "Local (localhost:8000)"
 
 API_URL = f"{LOCAL_API_BASE}{API_ENDPOINT_PATH}"
 PROCESSING_TIME_DAYS = 4.0
@@ -75,10 +73,15 @@ st.set_page_config(
 # --------------------------------------------------------------------------- #
 with st.sidebar:
     st.markdown("## 🌐 Environment")
+    page_url = st.context.url or ""
+    is_local = page_url.startswith("http://localhost") or page_url.startswith(
+        "http://127.0.0.1"
+    )
+    default_index = 0 if is_local else 1
     env_option = st.selectbox(
         "Engine target",
         ("Local (localhost:8000)", "Cloud (Render)"),
-        index=1 if DEFAULT_ENV == "Cloud (Render)" else 0,
+        index=default_index,
     )
     api_base = (
         LOCAL_API_BASE
