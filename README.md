@@ -1,8 +1,8 @@
 # US Superstore ML Pipeline
 
-👉 **[View Live Interactive Streamlit App](PASTE_YOUR_STREAMLIT_URL_HERE)**
+**(https://us-superstore-ml-pipeline-eqs3urcmbhwadrejhg6fzy.streamlit.app/)**
 
-A production-grade, full-stack data product that monitors e-commerce checkout transactions in real time and intercepts financial loss anomalies before they hit the ledger. The backend Random Forest inference engine is containerized and cloud-hosted, and the executive Streamlit dashboard — seeded from the US Superstore commerce dataset — routes every live transaction through the model and applies segment-aware financial guardrails on top.
+A production-grade, full-stack data product that monitors e-commerce checkout transactions in real time and intercepts financial loss anomalies before they hit the ledger. The backend Random Forest inference engine is containerized and cloud-hosted. The executive Streamlit dashboard, seeded from the US Superstore commerce dataset, routes every live transaction through the model and applies segment-aware financial guardrails on top.
 
 ## The Business Problem
 
@@ -73,7 +73,7 @@ Inference: `POST http://127.0.0.1:8000/predict/risk-intercept` with a JSON `Chec
 streamlit run app_ui.py
 ```
 
-Opening `http://localhost:8501` auto-selects the **Local** engine target and streams live transactions to your backend. When run from a deployed Streamlit Cloud URL, the same code auto-selects **Cloud (Render)** — no code changes or manual switching required.
+Opening `http://localhost:8501` auto-selects the **Local** engine target and streams live transactions to your backend. When run from a deployed Streamlit Cloud URL, the same code auto-selects **Cloud (Render)**. No code changes or manual switching required.
 
 ### 4. Run the test suite
 
