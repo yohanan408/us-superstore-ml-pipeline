@@ -12,8 +12,10 @@ While our backend Python pipeline flags toxic checkout flows, this dashboard pro
 * **Net Profit Margin:** **12.47%** overall yield, visualized against a **15.00%** strategic corporate target via a dynamic conditional-formatting gauge.
 
 ###  Dashboard Preview
-*(Replace the link below with a direct screenshot or GIF of your final localized Power BI canvas)*
-![Power BI Executive Dashboard](dashboard/preview_screenshot.png)
+<img width="763" height="431" alt="image" src="https://github.com/user-attachments/assets/19b345af-2ef4-4902-866c-d0feabf7ea87" />
+<img width="761" height="430" alt="Screenshot 2026-08-13 175913" src="https://github.com/user-attachments/assets/b353f3ed-0fdf-472b-b8c5-52fe74eb22d8" />
+
+
 
 ###  Analytical Core & Visual Story
 1. **Category Volume Distribution:** Visualizes processing weights (Office Supplies commanding 60.3% of transaction volume, balanced by Technology and Furniture).
