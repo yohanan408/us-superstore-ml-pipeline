@@ -385,20 +385,27 @@ if form_submitted:
     except Exception as exc:
         st.error(f"❌ Unexpected failure during risk assessment.\n\n`{exc}`")
     else:
-        action_directive = result.get("action_directive", "")
+        model_directive = result.get("action_directive", "")
         prediction = result.get("prediction_class", result.get("prediction", None))
         risk_percentage = result.get("risk_percentage", None)
 
         profit = metrics["calculated_profit"]
         margin = metrics["profit_margin"]
 
+        # Tier 1: native ML model interception (Risk > 50%) is credited to the model.
+        # Tier 2: fail-safe override fires ONLY on a model false-negative (ALLOW),
+        # when the segment-aware local accounting rule still flags the order.
+        model_blocked = "INTERCEPT_BLOCK" in model_directive
+        action_directive = model_directive
+
         override_engaged = False
-        if segment_input == "Consumer" and profit < 0:
-            action_directive = "INTERCEPT_BLOCK"
-            override_engaged = True
-        elif segment_input in ("Corporate", "Home Office") and margin < -15.0:
-            action_directive = "INTERCEPT_BLOCK"
-            override_engaged = True
+        if not model_blocked:
+            if segment_input == "Consumer" and profit < 0:
+                action_directive = "INTERCEPT_BLOCK"
+                override_engaged = True
+            elif segment_input in ("Corporate", "Home Office") and margin < -15.0:
+                action_directive = "INTERCEPT_BLOCK"
+                override_engaged = True
         metrics_summary = (
             f"Discount Applied: **${metrics['discount_amount']:,.2f}** · "
             f"Net Selling Price: **${metrics['net_selling_price']:,.2f}** · "
@@ -455,21 +462,26 @@ if form_submitted:
             if profit < 0:
                 st.session_state.session_leakage_shielded += abs(profit)
             risk_note = (
-                f" · Risk: **{risk_percentage:.2f}%**" if risk_percentage is not None else ""
+                f" · Risk:**{risk_percentage:.2f}%** " if risk_percentage is not None else ""
             )
-            trigger_reason = (
-                f"negative profit (${profit:,.2f})"
-                if segment_input == "Consumer"
-                else f"margin {margin:.2f}% breached the -15.0% promotional buffer"
-            )
-            override_note = (
-                f" ⚠️ **Financial fail-safe engaged** — `{segment_input}` segment rule: "
-                f"{trigger_reason} overrode the model directive." if override_engaged else ""
-            )
+            if override_engaged:
+                block_heading = "🚫 **INTERCEPTED & BLOCKED**"
+                block_reason = (
+                    f"⚠️ **Financial fail-safe engaged — negative profit overrode the "
+                    f"false-negative model directive** "
+                    f"(`{segment_input}` segment: calculated profit "
+                    f"${profit:,.2f}, margin {margin:.2f}%)."
+                )
+            else:
+                block_heading = "🤖 **ML MODEL INTERCEPTED**"
+                block_reason = (
+                    f"The Random Forest engine identified the margin risk threshold "
+                    f"from its risk score{risk_note}— no fail-safe override required."
+                )
             st.session_state.last_feedback = (
                 "error",
-                f"🚫 **INTERCEPTED & BLOCKED** (Directive: `{action_directive}`"
-                f"{risk_note}{override_note})\n\n{metrics_summary}",
+                f"{block_heading} (Directive: `{action_directive}`"
+                f"{risk_note})\n\n{block_reason}\n\n{metrics_summary}",
             )
         st.rerun()
 
