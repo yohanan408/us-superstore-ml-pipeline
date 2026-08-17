@@ -1,6 +1,6 @@
 # US Superstore ML Pipeline
 
-👉 **(https://us-superstore-ml-pipeline-eqs3urcmbhwadrejhg6fzy.streamlit.app/)**
+**(https://us-superstore-ml-pipeline-eqs3urcmbhwadrejhg6fzy.streamlit.app/)**
 
 A production-grade, full-stack data product that monitors e-commerce checkout transactions in real time and intercepts financial loss anomalies before they hit the ledger. The backend Random Forest inference engine is containerized and cloud-hosted, and the executive Streamlit dashboard — seeded from the US Superstore commerce dataset — routes every live transaction through the model and applies segment-aware financial guardrails on top.
 
