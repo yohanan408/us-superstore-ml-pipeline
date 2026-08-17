@@ -7,3 +7,7 @@ matplotlib
 pytest
 fastapi
 uvicorn
+streamlit
+plotly
+requests
+xlrd
