@@ -8,7 +8,7 @@ A production-grade, full-stack data product that monitors e-commerce checkout tr
 
 Unmonitored checkout discounts create **non-linear margin cliffs**. A markdown that looks reasonable on a single line item compounds across volume, quantity, and fulfillment cost, silently converting profitable carts into net-loss transactions. This pipeline turns that blind spot into a real-time, automated guardrail: every checkout is scored, every loss-anomaly is blocked at the edge, and every safe transaction is allowed to fulfill.
 
-The interactive frontend layers a second, **accounting-driven financial fail-safe** beneath the machine learning classification — guaranteeing that no negative-margin transaction ever reaches the ledger, even on out-of-distribution inputs the model has never seen.
+The interactive frontend layers a second **accounting-driven financial fail-safe** beneath the machine learning classification, guaranteeing that no negative-margin transaction ever reaches the ledger, even on out-of-distribution inputs the model has never seen.
 
 ## 6-Stage Engineering Pipeline & Interactive UI
 
@@ -17,13 +17,13 @@ The interactive frontend layers a second, **accounting-driven financial fail-saf
 | 1 | `src/data_ingestion.py` | Pydantic validation of inbound checkout payloads; `Discount` is force-cast to `float` to prevent integer truncation. |
 | 2 | `src/logger_config.py` | Centralized dual-routing logger (console + `logs/pipeline_runtime.log`) with a uniform `[Timestamp] [Level] [file:line]` format. |
 | 3 | `src/feature_preprocessor.py` | Matrix padding, key re-alignment, and RobustScaler normalization of continuous fields for the production feature space. |
-| 4 | `app/main.py` | FastAPI gateway — `/` health probe and `/predict/risk-intercept` inference endpoint backed by the tuned Random Forest. |
+| 4 | `app/main.py` | FastAPI gateway: `/` health probe and `/predict/risk-intercept` inference endpoint backed by the tuned Random Forest. |
 | 5 | `tests/test_prediction_pipeline.py` | CI-grade pytest + TestClient suite verifying preprocessing and HTTP routing end-to-end. |
-| 6 | `app_ui.py` | Streamlit executive command center — live KPI cards, Plotly analytics, real-time risk scoring, and segment-aware financial guardrails. |
+| 6 | `app_ui.py` | Streamlit executive command center: live KPI cards, Plotly analytics, real-time risk scoring, and segment-aware financial guardrails. |
 
 ### Dual Local/Cloud API Routing
 
-The frontend is **environment-agnostic**: a sidebar "Engine target" selector targets either the Dockerized backend at `http://localhost:8000` or the live Render deployment, and the default is chosen automatically from the Streamlit page URL. Open the app on your laptop — it routes to your local container with zero configuration; open the deployed URL — it instantly targets the cloud backend.
+The frontend is **environment-agnostic**: a sidebar "Engine target" selector targets either the Dockerized backend at `http://localhost:8000` or the live Render deployment, and the default is chosen automatically from the Streamlit page URL. Open the app on your laptop, it routes to your local container with zero configuration; open the deployed URL, it instantly targets the cloud backend.
 
 | Environment | API endpoint |
 |-------------|--------------|
