@@ -34,7 +34,7 @@ The frontend is **environment-agnostic**: a sidebar "Engine target" selector tar
 
 On top of the model's 50% classification line, the dashboard enforces an accounting-derived fail-safe that adapts to business strategy per customer segment:
 
-- **Consumer checkouts — strict enforcement:** any transaction whose locally computed profit is negative (`calculated_profit < 0`) is forcibly overridden to `INTERCEPT_BLOCK`, no matter what the model says.
+- **Consumer checkouts — strict enforcement:** any transaction whose locally computed profit is negative (`calculated_profit < 0`) is forcibly overridden to `INTERCEPT_BLOCK`, no matter what the machine learning model says.
 - **Corporate / Home Office — managed 15% promotional buffer:** smaller row-level losses are absorbed to preserve premier B2B relationships, and checkout is only intercepted once the computed net profit margin breaches `-15.0%`.
 
 Every intercepted net-loss order is accumulated into the **Revenue Leakage Shielded** KPI, proving the machine learning security firewall in real time.
