@@ -55,10 +55,6 @@ To complement real-time inline predictions, the repository features an offline e
 
 ### Dual Local/Cloud API Routing
 
-The frontend is **environment-agnostic**:
-
-### Dual Local/Cloud API Routing
-
 The frontend is **environment-agnostic**: a sidebar "Engine target" selector targets either the Dockerized backend at `http://localhost:8000` or the live Render deployment, and the default is chosen automatically from the Streamlit page URL. Open the app on your laptop, it routes to your local container with zero configuration; open the deployed URL, it instantly targets the cloud backend.
 
 | Environment | API endpoint |
