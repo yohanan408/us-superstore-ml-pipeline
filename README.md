@@ -23,7 +23,7 @@ The interactive frontend layers a second **accounting-driven financial fail-safe
 
 ---
 
-## 🏛️ Stage 7: Demand-Aware Supply Chain Analytics Warehouse (dbt + Postgres)
+## Stage 7: Demand-Aware Supply Chain Analytics Warehouse (dbt + Postgres)
 
 To complement real-time inline predictions, the repository features an offline enterprise **Data Engineering & Governance Pipeline** located in the `demand_aware_pipeline/` subdirectory. This architecture processes historical transactional ledgers to capture logistical latencies and revenue leak trends over multi-month windows.
 
