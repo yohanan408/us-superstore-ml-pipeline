@@ -3,3 +3,9 @@ __pycache__/
 .venv/
 .DS_Store
 logs/*.log
+# Local dbt artifacts and query logs
+demand_aware_pipeline/target/
+demand_aware_pipeline/logs/
+demand_aware_pipeline/dbt_packages/
+demand_aware_pipeline/profiles.yml
+New folder

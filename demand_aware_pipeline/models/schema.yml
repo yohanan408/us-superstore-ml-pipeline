@@ -1,0 +1,31 @@
+version: 2
+
+sources:
+  - name: raw
+    database: demand_aware_dw
+    schema: raw
+    tables:
+      - name: superstore_transactions
+
+models:
+  - name: dim_products
+    description: "A uniquely deduplicated list of retail products tracking cumulative performance and profit margin ratios."
+    columns:
+      - name: product_surrogate_key        # Target the new cryptographic primary key
+        description: "The absolute unique surrogate key generated from product parameters."
+        tests:
+          - unique
+          - not_null
+
+  - name: fact_orders
+    description: "The primary operational fact table tracking transaction volumes, delivery lead times, and promotional margin erosion flags."
+    columns:
+      - name: row_id
+        description: "The absolute unique transaction key row index."
+        tests:
+          - unique
+          - not_null
+      - name: quantity
+        description: "Total order items per checkout. Must never drop to zero or negative."
+        tests:
+          - not_null
