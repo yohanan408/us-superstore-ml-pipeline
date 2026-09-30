@@ -11,11 +11,13 @@ An end-to-end e-commerce analytics and machine-learning project built around the
 The project combines exploratory analysis, financial-risk classification, API inference, automated testing, Docker, and an interactive Streamlit application to examine how discounting and transaction characteristics relate to negative-profit outcomes.
 
 **Key components:** Python • scikit-learn • FastAPI • Streamlit • Docker • pytest • PostgreSQL
-## The Business Problem
+## Business Problem
 
-Unmonitored checkout discounts create **non-linear margin cliffs**. A markdown that looks reasonable on a single line item compounds across volume, quantity, and fulfillment cost, silently converting profitable carts into net-loss transactions. This pipeline turns that blind spot into a real-time, automated guardrail: every checkout is scored, every loss-anomaly is blocked at the edge, and every safe transaction is allowed to fulfill.
+Discounting can increase sales volume while also creating transactions with negative profit.
 
-The interactive frontend layers a second **accounting-driven financial fail-safe** beneath the machine learning classification, guaranteeing that no negative-margin transaction ever reaches the ledger, even on out-of-distribution inputs the model has never seen.
+This project investigates that trade-off by using transaction-level features to identify patterns associated with negative-profit outcomes and by building a machine-learning workflow that can score new checkout transactions.
+
+The objective is not to replace business judgment, but to demonstrate how analytical models can be integrated into a transaction-monitoring workflow.
 
 ## 6-Stage Engineering Pipeline & Interactive UI
 
