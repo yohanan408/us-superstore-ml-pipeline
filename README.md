@@ -26,7 +26,7 @@ The objective is not to replace business judgment, but to demonstrate how analyt
 | 1 | `src/data_ingestion.py` | Pydantic validation of inbound checkout payloads; `Discount` is force-cast to `float` to prevent integer truncation. |
 | 2 | `src/logger_config.py` | Centralized dual-routing logger (console + `logs/pipeline_runtime.log`) with a uniform `[Timestamp] [Level] [file:line]` format. |
 | 3 | `src/feature_preprocessor.py` | Matrix padding, key re-alignment, and RobustScaler normalization of continuous fields for the production feature space. |
-| 4 | `app/main.py` | FastAPI gateway: `/` health probe and `/predict/risk-intercept` inference endpoint backed by the tuned Random Forest. |
+| 4 | `app/main.py` | FastAPI gateway: `/` FastAPI gateway with a health endpoint and /predict/risk-intercept inference endpoint backed by the Random Forest model. |
 | 5 | `tests/test_prediction_pipeline.py` | CI-grade pytest + TestClient suite verifying preprocessing and HTTP routing end-to-end. |
 | 6 | `app_ui.py` | Streamlit executive command center: live KPI cards, Plotly analytics, real-time risk scoring, and segment-aware financial guardrails. |
 
