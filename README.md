@@ -80,13 +80,16 @@ On top of the model's 50% classification line, the dashboard enforces an account
 
 Every intercepted net-loss order is accumulated into the **Revenue Leakage Shielded** KPI, proving the machine learning security firewall in real time.
 
-## Tournament Metrics
+## Model Evaluation
 
-The candidate models were evaluated head-to-head in a model tournament on macro F1-score. **The deadlock was broken by the Random Forest classifier**:
+Candidate classification models were evaluated using macro F1-score, with ROC-AUC used as an additional evaluation metric.
 
-- **Macro F1-Score: 0.88** (converged tournament score)
-- **ROC-AUC: 0.984** (Random Forest tie-breaker)
-- Production artifacts serialized under `production_models/` via `joblib`.
+| Metric | Result |
+|---|---:|
+| Macro F1 | 0.88 |
+| ROC-AUC | 0.984 |
+
+The Random Forest classifier was selected for the deployed inference workflow.
 
 ## Developer Quickstart
 
