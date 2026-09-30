@@ -2,8 +2,15 @@
 
 **(https://us-superstore-ml-pipeline-eqs3urcmbhwadrejhg6fzy.streamlit.app/)**
 
-A production-grade, full-stack data product that monitors e-commerce checkout transactions in real time and intercepts financial loss anomalies before they hit the ledger. The backend Random Forest inference engine is containerized and cloud-hosted. The executive Streamlit dashboard, seeded from the US Superstore commerce dataset, routes every live transaction through the model and applies segment-aware financial guardrails on top.
+# US Superstore ML Pipeline
 
+[![Live App](https://img.shields.io/badge/Live%20App-Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://us-superstore-ml-pipeline-eqs3urcmbhwadrejhg6fzy.streamlit.app/)
+
+An end-to-end e-commerce analytics and machine-learning project built around the US Superstore dataset.
+
+The project combines exploratory analysis, financial-risk classification, API inference, automated testing, Docker, and an interactive Streamlit application to examine how discounting and transaction characteristics relate to negative-profit outcomes.
+
+**Key components:** Python • scikit-learn • FastAPI • Streamlit • Docker • pytest • SQL
 ## The Business Problem
 
 Unmonitored checkout discounts create **non-linear margin cliffs**. A markdown that looks reasonable on a single line item compounds across volume, quantity, and fulfillment cost, silently converting profitable carts into net-loss transactions. This pipeline turns that blind spot into a real-time, automated guardrail: every checkout is scored, every loss-anomaly is blocked at the edge, and every safe transaction is allowed to fulfill.
