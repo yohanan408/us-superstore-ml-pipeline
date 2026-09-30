@@ -392,7 +392,7 @@ if form_submitted:
         profit = metrics["calculated_profit"]
         margin = metrics["profit_margin"]
 
-        # Tier 1: native ML model interception (Risk > 50%) is credited to the model.
+        # Tier 1: native ML model interception based on the classifier prediction
         # Tier 2: fail-safe override fires ONLY on a model false-negative (ALLOW),
         # when the segment-aware local accounting rule still flags the order.
         model_blocked = "INTERCEPT_BLOCK" in model_directive
@@ -475,8 +475,8 @@ if form_submitted:
             else:
                 block_heading = "🤖 **ML MODEL INTERCEPTED**"
                 block_reason = (
-                    f"The Random Forest engine identified the margin risk threshold "
-                    f"from its risk score{risk_note}— no fail-safe override required."
+                    f"The Random Forest engine flagged the transaction "
+                    f"as high risk{risk_note}— no fail-safe override required."
                 )
             st.session_state.last_feedback = (
                 "error",
