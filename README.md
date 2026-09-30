@@ -10,7 +10,7 @@ An end-to-end e-commerce analytics and machine-learning project built around the
 
 The project combines exploratory analysis, financial-risk classification, API inference, automated testing, Docker, and an interactive Streamlit application to examine how discounting and transaction characteristics relate to negative-profit outcomes.
 
-**Key components:** Python • scikit-learn • FastAPI • Streamlit • Docker • pytest • SQL
+**Key components:** Python • scikit-learn • FastAPI • Streamlit • Docker • pytest • PostgreSQL
 ## The Business Problem
 
 Unmonitored checkout discounts create **non-linear margin cliffs**. A markdown that looks reasonable on a single line item compounds across volume, quantity, and fulfillment cost, silently converting profitable carts into net-loss transactions. This pipeline turns that blind spot into a real-time, automated guardrail: every checkout is scored, every loss-anomaly is blocked at the edge, and every safe transaction is allowed to fulfill.
