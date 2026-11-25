@@ -50,7 +50,7 @@ To complement real-time inline predictions, the repository features an offline e
 ###  Analytics Infrastructure Specifications
 
 - **Data Inspection Layer:** Programmatic Python (`SQLAlchemy`) ingestion engine executing strict character-stripping, type-normalizations, and regional date conversions directly into local **PostgreSQL partitions via Port 5432**.
-- **Transformation Layer (dbt Core):** Decoupled, modular SQL models restructuring raw operational inputs into an optimized, single-direction **Many-to-One (1:1) Star Schema** layout.
+- **Transformation Layer (dbt Core):** Decoupled, modular SQL models restructuring raw operational inputs into an optimized, single-direction **Many-to-One Star Schema** layout.
 - **Governance Layer:** Automated data integrity validations (`dbt test`) enforcing uniqueness constraints on your primary relational fields to block pipeline drift.
 - **BI Visualization Layer:** Star schema relational coordinates exposed to **Power BI Desktop** to plot operational SLA violations alongside structural margin leakage rations.
 
