@@ -57,7 +57,7 @@ To complement real-time inline predictions, the repository features an offline e
 ###  Core Analytics Engineering Discoveries
 
 - **Cryptographic Surrogate Keys:** Intercepted **32 recycled product ID schema duplication anomalies** in the raw source file. Cleanly resolved the M2M filtering collision by hashing composite columns into an MD5 cryptographic surrogate string.
-- **Logistical Bottlenecks Captured:** Isolated a massive Q4 supply chain breakdown peaking aggressively in September with over **160 SLA shipping violations** within Office Supplies inventory clusters.
+- **Logistical Bottlenecks Captured:** Isolated a massive Q3 supply chain breakdown peaking aggressively in September with over **160 SLA shipping violations** within Office Supplies inventory clusters.
 - **The First-Class Paradox:** Charted a visual dual-axis correlation proving that while *First-Class* express shipping drastically minimizes fulfillment latency, its premium courier overhead spikes the *Margin Leakage Rate* close to **19%**, making *Second-Class* transit your ultimate retail financial sweet spot.
 
 ---
