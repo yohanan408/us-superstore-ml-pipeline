@@ -139,7 +139,7 @@ us-superstore-ml-pipeline/
 
 ## Data
 
-The project uses the US Superstore sales dataset (`data/US Superstore data.xls`, 9,994 rows). [TODO: add the source and any license or attribution requirements.]
+The project uses the US Superstore sales dataset (`data/US Superstore data.xls`, 9,994 rows). [[TODO: add the source and any license or attribution requirements.](https://www.kaggle.com/datasets/juhi1994/superstore)]
 
 ## License
 
