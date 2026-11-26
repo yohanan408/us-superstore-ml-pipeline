@@ -277,7 +277,7 @@ kpi_cols[2].metric(
     f"${total_profit:,.0f}",
 )
 kpi_cols[3].metric(
-    "Revenue Leakage Shielded",
+    "Leakage Shielded",
     f"${leakage_shielded:,.0f}",
     delta=(
         f"${st.session_state.session_leakage_shielded:,.0f} preserved live"
@@ -569,5 +569,5 @@ st.caption(
     "Live engine status — every submitted transaction is scored in real time "
     "by the Dockerized Random Forest (0.984 ROC-AUC). Allowed orders append to "
     "the ledger (stamped Dec 2017); intercepted net-loss orders accumulate into "
-    "the Revenue Leakage Shielded accumulator."
+    "the Leakage Shielded accumulator."
 )
