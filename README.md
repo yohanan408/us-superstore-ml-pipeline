@@ -109,7 +109,7 @@ pytest tests/ -v
 us-superstore-ml-pipeline/
 ├── app/
 │   └── main.py
-├── dashboard/                  # [TODO: one-line description; move any Power BI file to the warehouse repo]
+├── dashboard/
 ├── data/
 │   └── US Superstore data.xls
 ├── notebooks/
@@ -131,7 +131,7 @@ us-superstore-ml-pipeline/
 ├── LICENSE
 ├── README.md
 ├── app_ui.py
-├── realtime_demo.py            # [TODO: one-line description]
+├── realtime_demo.py
 └── requirements.txt
 ```
 
