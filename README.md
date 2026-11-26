@@ -8,7 +8,7 @@ A machine-learning project built on the US Superstore sales dataset. It covers e
 
 > **Note on scope:** The dataset is historical. The "real-time" checkout scoring in this project is a simulation that replays historical transactions against the API; it is a demonstration of how a model could sit in a transaction-monitoring workflow, not a production system.
 
-> **Related project:** The SQL side of this dataset (PostgreSQL ingestion, a dbt star schema, and a Power BI shipping analysis) lives in its own repository: [superstore-dbt-warehouse](TODO-add-link).
+> **Related project:** The SQL side of this dataset (PostgreSQL ingestion, a dbt star schema, and a Power BI shipping analysis) lives in its own repository: [superstore-dbt-warehouse](https://github.com/yohanan408/superstore-dbt-warehouse).
 
 ## Business Problem
 
