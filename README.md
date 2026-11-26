@@ -1,94 +1,70 @@
 # US Superstore ML Pipeline
 
-**(https://us-superstore-ml-pipeline-eqs3urcmbhwadrejhg6fzy.streamlit.app/)**
-
-# US Superstore ML Pipeline
-
 [![Live App](https://img.shields.io/badge/Live%20App-Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://us-superstore-ml-pipeline-eqs3urcmbhwadrejhg6fzy.streamlit.app/)
 
-An end-to-end e-commerce analytics and machine-learning project built around the US Superstore dataset.
+A machine-learning project built on the US Superstore sales dataset. It covers exploratory analysis, negative-profit classification, a FastAPI inference service, automated tests, Docker, and a Streamlit application.
 
-The project combines exploratory analysis, financial-risk classification, API inference, automated testing, Docker, and an interactive Streamlit application to examine how discounting and transaction characteristics relate to negative-profit outcomes.
+**Stack:** Python • scikit-learn • FastAPI • Streamlit • Plotly • Docker • pytest
 
-**Key components:** Python • scikit-learn • FastAPI • Streamlit • Docker • pytest • PostgreSQL
+> **Note on scope:** The dataset is historical. The "real-time" checkout scoring in this project is a simulation that replays historical transactions against the API; it is a demonstration of how a model could sit in a transaction-monitoring workflow, not a production system.
+
+> **Related project:** The SQL side of this dataset (PostgreSQL ingestion, a dbt star schema, and a Power BI shipping analysis) lives in its own repository: [superstore-dbt-warehouse](TODO-add-link).
+
 ## Business Problem
 
-Discounting can increase sales volume while also creating transactions with negative profit.
+Discounting can increase sales volume while also creating transactions that lose money.
 
-This project investigates that trade-off by using transaction-level features to identify patterns associated with negative-profit outcomes and by building a machine-learning workflow that can score new checkout transactions.
+This project uses transaction-level features to identify patterns associated with negative-profit outcomes, and builds a machine-learning workflow that can score a transaction at the point of sale. The goal is to support business judgment, not replace it.
 
-The objective is not to replace business judgment, but to demonstrate how analytical models can be integrated into a transaction-monitoring workflow.
+**What the data shows:**
+- 1,871 of the 9,994 order lines (18.7%) have negative profit, totalling about $156,131 in losses. [TODO: add a notebook cell that prints these two figures.]
+- Profitability collapses at deep discounts: every line at the 70% and 80% discount tiers loses money.
+- In every shipping mode, 95–99% of lines discounted above 20% lose money, versus about 5–7% of the rest (see the "Shipping Mode vs. Loss Rate" section of the notebook).
 
-## 6-Stage Engineering Pipeline & Interactive UI
+## Inference Pipeline and UI
 
 | Stage | Component | Purpose |
-|-------|-----------|---------|
-| 1 | `src/data_ingestion.py` | Pydantic validation of inbound checkout payloads; `Discount` is force-cast to `float` to prevent integer truncation. |
-| 2 | `src/logger_config.py` | Centralized dual-routing logger (console + `logs/pipeline_runtime.log`) with a uniform `[Timestamp] [Level] [file:line]` format. |
-| 3 | `src/feature_preprocessor.py` | Matrix padding, key re-alignment, and RobustScaler normalization of continuous fields for the production feature space. |
-| 4 | `app/main.py` | FastAPI gateway: `/` FastAPI gateway with a health endpoint and /predict/risk-intercept inference endpoint backed by the Random Forest model. |
-| 5 | `tests/test_prediction_pipeline.py` | CI-grade pytest + TestClient suite verifying preprocessing and HTTP routing end-to-end. |
-| 6 | `app_ui.py` | Streamlit interface with KPI cards, Plotly analytics, transaction-level risk scoring, and segment-based financial rules.|
+| ----- | --------- | ------- |
+| 1 | `src/data_ingestion.py` | Pydantic validation of inbound checkout payloads. `Discount` is cast to `float` to prevent integer truncation. |
+| 2 | `src/logger_config.py` | Centralized logger writing to the console and `logs/pipeline_runtime.log`, with a uniform `[Timestamp] [Level] [file:line]` format. |
+| 3 | `src/feature_preprocessor.py` | Column alignment and padding to the training feature space, plus `RobustScaler` normalization of continuous fields. |
+| 4 | `app/main.py` | FastAPI service with a health endpoint (`GET /`) and an inference endpoint (`POST /predict/risk-intercept`) backed by the Random Forest model. |
+| 5 | `tests/test_prediction_pipeline.py` | pytest + `TestClient` suite covering preprocessing and HTTP routing end to end. |
+| 6 | `app_ui.py` | Streamlit interface with KPI cards, Plotly analytics, transaction-level risk scoring, and segment-based financial rules. |
 
----
+## Dual Local/Cloud API Routing
 
-## Stage 7: Demand-Aware Supply Chain Analytics Warehouse (dbt + Postgres)
-
-To complement real-time inline predictions, the repository features an offline enterprise **Data Engineering & Governance Pipeline** located in the `demand_aware_pipeline/` subdirectory. This architecture processes historical transactional ledgers to capture logistical latencies and revenue leak trends over multi-month windows.
-
-```text
-                       [RAW SCHEMA]                                   [STAGING SCHEMA]
-              superstore_transactions (9,994 rows)           dim_products (1,894 Cryptographic SKUs)
-                               │                                             ▲
-                               ▼                                             │ Many-to-One (*:1)
-                        [dbt core] ──────────────────────────────────────────┴ Star Schema Link
-                               │
-                               ▼
-                        fact_orders (9,994 rows w/ calculated Lead Times & Margin Leaks)
-```
-
-###  Analytics Infrastructure Specifications
-
-- **Data Inspection Layer:** Programmatic Python (`SQLAlchemy`) ingestion engine executing strict character-stripping, type-normalizations, and regional date conversions directly into local **PostgreSQL partitions via Port 5432**.
-- **Transformation Layer (dbt Core):** Decoupled, modular SQL models restructuring raw operational inputs into an optimized, single-direction **Many-to-One Star Schema** layout.
-- **Governance Layer:** Automated data integrity validations (`dbt test`) enforcing uniqueness constraints on your primary relational fields to block pipeline drift.
-- **BI Visualization Layer:** Star schema relational coordinates exposed to **Power BI Desktop** to plot operational SLA violations alongside structural margin leakage rations.
-
-###  Core Analytics Engineering Discoveries
-
-- **Cryptographic Surrogate Keys:** Intercepted **32 recycled product ID schema duplication anomalies** in the raw source file. Cleanly resolved the M2M filtering collision by hashing composite columns into an MD5 cryptographic surrogate string.
-- **Logistical Bottlenecks Captured:** Isolated a massive Q3 supply chain breakdown peaking aggressively in September with over **160 SLA shipping violations** within Office Supplies inventory clusters.
-- **The First-Class Paradox:** Charted a visual dual-axis correlation proving that while *First-Class* express shipping drastically minimizes fulfillment latency, its premium courier overhead spikes the *Margin Leakage Rate* close to **19%**, making *Second-Class* transit your ultimate retail financial sweet spot.
-
----
-
-### Dual Local/Cloud API Routing
-
-The frontend is **environment-agnostic**: a sidebar "Engine target" selector targets either the Dockerized backend at `http://localhost:8000` or the live Render deployment, and the default is chosen automatically from the Streamlit page URL. Open the app on your laptop, it routes to your local container with zero configuration; open the deployed URL, it instantly targets the cloud backend.
+The Streamlit frontend has an "Engine target" selector that points either at the Dockerized backend on `http://localhost:8000` or at the Render deployment. The default is chosen automatically from the page URL: opened locally it targets the local container, opened from the deployed URL it targets the cloud backend.
 
 | Environment | API endpoint |
-|-------------|--------------|
+| ----------- | ------------ |
 | Local (Docker) | `http://localhost:8000/predict/risk-intercept` |
 | Cloud (Render) | `https://us-superstore-ml-pipeline.onrender.com/predict/risk-intercept` |
 
-## Financial Analysis
+> The live demo may take up to a minute to respond on first load if the hosting instances have gone to sleep.
 
-The dashboard includes transaction-level financial metrics to identify negative-profit exposure.
+## Model
 
-For the analysed transactions, Power BI/DAX was used to quantify the absolute value of negative-profit transactions, providing a measure of the financial exposure associated with loss-making orders.
+**Task:** Binary classification of whether an order line has negative profit (about 19% of rows are loss-making).
 
-The dashboard then allows users to examine how discounting, customer segment, and other transaction characteristics relate to these outcomes.
+**Setup:** Stratified 80/20 split (`random_state=42`), giving 7,995 training rows and 1,999 test rows (374 loss-making). Features are `Sales`, `Quantity`, `Discount`, processing days, ship mode, customer segment, region, category, sub-category, and a VIP-customer flag. All profit-derived columns (profit margin, ROI, buying price) are excluded to avoid target leakage. Models use `class_weight='balanced'` and a 0.5 decision threshold.
 
-## Model Evaluation
+| Model | Macro F1 | ROC-AUC | Loss recall | Loss precision |
+| ----- | -------- | ------- | ----------- | -------------- |
+| Random Forest (deployed) | 0.88 | 0.983 | 0.89 | 0.75 |
+| Extra Trees | 0.88 | 0.982 | 0.91 | 0.74 |
+| Logistic Regression | 0.88 | 0.982 | 0.93 | 0.71 |
+| Decision Tree | 0.87 | 0.969 | 0.92 | 0.70 |
 
-Candidate classification models were evaluated using macro F1-score, with ROC-AUC used as an additional evaluation metric.
+The Random Forest is the deployed model because it balances recall and precision and is more stable than a single tree. All four models perform similarly, so the choice is mostly a precision/recall trade-off. Results come from a single hold-out split.
 
-| Metric | Result |
-|---|---:|
-| Macro F1 | 0.88 |
-| ROC-AUC | 0.984 |
+**Context for these numbers:**
+- `Discount` accounts for about 67% of the Random Forest's feature importance. A model-free rule that flags any order with a discount above 20% reaches macro F1 0.90 (precision 0.96, recall 0.72) on the same test set. The models add better ranking (ROC-AUC 0.98 vs. 0.94 for discount alone) and the option of much higher recall (0.89–0.93 vs. 0.72) at lower precision.
+- `Processing_Time_Days` is only known after an order ships, so it would not be available at checkout time. A production version should drop it and retrain.
+- The `RobustScaler` was fit on the full dataset before the train/test split. This has little effect on tree-based models, but the scaler should be fit on training data only in a stricter setup.
+- Random Forest results can differ slightly across scikit-learn versions, so pin the version used for training.
 
-The Random Forest classifier was selected for the deployed inference workflow.
+**Notes on the model files:** The `.joblib` files in `production_models/` were created with a specific scikit-learn version and should be loaded with the version pinned in `requirements.txt`. Joblib files are pickles, so only load files from sources you trust. The models are trained in `notebooks/E-Commerce Platform Analysis.ipynb`.
 
 ## Developer Quickstart
 
@@ -98,17 +74,20 @@ The Random Forest classifier was selected for the deployed inference workflow.
 pip install -r requirements.txt
 ```
 
-### 2. Spin up the FastAPI backend (terminal 1)
+### 2. Start the FastAPI backend (terminal 1)
 
 ```bash
 python3 -m uvicorn app.main:app --reload
 ```
 
-Health check: `GET http://127.0.0.1:8000/` returns `{"status": "ONLINE"}`.
+- Health check: `GET http://127.0.0.1:8000/` returns `{"status": "ONLINE"}`.
+- Inference: `POST http://127.0.0.1:8000/predict/risk-intercept` with a JSON `CheckoutCartRequest` body.
 
-Inference: `POST http://127.0.0.1:8000/predict/risk-intercept` with a JSON `CheckoutCartRequest` body.
+Alternatively, run the containerized backend:
 
-> Alternatively, run the containerized backend: `docker-compose up --build` (health probe included).
+```bash
+docker compose up --build
+```
 
 ### 3. Launch the Streamlit frontend (terminal 2)
 
@@ -116,9 +95,9 @@ Inference: `POST http://127.0.0.1:8000/predict/risk-intercept` with a JSON `Chec
 streamlit run app_ui.py
 ```
 
-Opening `http://localhost:8501` auto-selects the **Local** engine target and streams live transactions to your backend. When run from a deployed Streamlit Cloud URL, the same code auto-selects **Cloud (Render)**. No code changes or manual switching required.
+Opening `http://localhost:8501` selects the **Local** engine target automatically.
 
-### 4. Run the test suite
+### 4. Run the tests
 
 ```bash
 pytest tests/ -v
@@ -130,11 +109,9 @@ pytest tests/ -v
 us-superstore-ml-pipeline/
 ├── app/
 │   └── main.py
-├── app_ui.py
+├── dashboard/                  # [TODO: one-line description; move any Power BI file to the warehouse repo]
 ├── data/
 │   └── US Superstore data.xls
-├── logs/
-│   └── pipeline_runtime.log
 ├── notebooks/
 │   └── E-Commerce Platform Analysis.ipynb
 ├── production_models/
@@ -153,9 +130,17 @@ us-superstore-ml-pipeline/
 ├── docker-compose.yml
 ├── LICENSE
 ├── README.md
+├── app_ui.py
+├── realtime_demo.py            # [TODO: one-line description]
 └── requirements.txt
 ```
 
+`logs/` is created at runtime by the logger and is not tracked in the repository.
+
+## Data
+
+The project uses the US Superstore sales dataset (`data/US Superstore data.xls`, 9,994 rows). [TODO: add the source and any license or attribution requirements.]
+
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).
