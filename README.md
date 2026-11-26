@@ -17,7 +17,7 @@ Discounting can increase sales volume while also creating transactions that lose
 This project uses transaction-level features to identify patterns associated with negative-profit outcomes, and builds a machine-learning workflow that can score a transaction at the point of sale. The goal is to support business judgment, not replace it.
 
 **What the data shows:**
-- 1,871 of the 9,994 order lines (18.7%) have negative profit, totalling about $156,131 in losses. [TODO: add a notebook cell that prints these two figures.]
+- 1,871 of the 9,994 order lines (18.7%) have negative profit, totalling about $156,131 in losses.
 - Profitability collapses at deep discounts: every line at the 70% and 80% discount tiers loses money.
 - In every shipping mode, 95–99% of lines discounted above 20% lose money, versus about 5–7% of the rest (see the "Shipping Mode vs. Loss Rate" section of the notebook).
 
