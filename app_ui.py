@@ -73,7 +73,11 @@ st.set_page_config(
 # --------------------------------------------------------------------------- #
 with st.sidebar:
     st.markdown("## 🌐 Environment")
-    page_url = st.context.url or ""
+    # Safely handle the local vs cloud Streamlit version mismatch
+    try:
+        page_url = st.context.url or ""
+    except AttributeError:
+        page_url = ""
     is_local = page_url.startswith("http://localhost") or page_url.startswith(
         "http://127.0.0.1"
     )
